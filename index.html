@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greenline Landscapes | Sample landscaping website</title>
+<meta name="description" content="Sample single-page website for a fictional garden design and landscaping company.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#F3EFE4; --bone-2:#E8E1D0; --paper:#FBF9F3;
+  --forest:#1C2E22; --forest-2:#2B4232; --moss:#3F5F35; --sage:#A9B89A;
+  --amber:#D08A1E; --amber-dark:#A86A0E;
+  --ink:#1C2E22; --muted:#55604F; --line:#D9D1BD;
+  --serif:'Playfair Display', Georgia, serif;
+  --sans:'Raleway', system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+section[id]{scroll-margin-top:84px}
+a{color:var(--moss)}
+a,button,select,label[for]{cursor:pointer}
+input,select,textarea,button{font:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;margin:0}
+em{font-style:italic;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--forest);color:#fff;padding:10px 16px;z-index:100;text-decoration:none}
+.skip:focus{top:12px}
+.eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
+
+/* Buttons: squared, editorial */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 28px;font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1.5px solid transparent;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.btn-amber{background:var(--amber);color:var(--forest)}
+.btn-amber:hover{background:#E39B2C}
+.btn-line{border-color:currentColor;color:#fff;background:transparent}
+.btn-line:hover{background:#fff;color:var(--forest)}
+.btn-forest{background:var(--forest);color:var(--bone)}
+.btn-forest:hover{background:var(--moss)}
+
+/* Header (over hero, solid after scroll) */
+header.top{position:fixed;top:0;left:0;right:0;z-index:50;color:#fff;transition:background-color .3s ease,color .3s ease,box-shadow .3s ease}
+header.top.solid{background:var(--bone);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:80px;flex-wrap:wrap}
+.logo{display:inline-flex;align-items:center;gap:12px;color:inherit;text-decoration:none;min-height:44px}
+.logo b{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:.01em}
+.logo small{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;opacity:.8;margin-top:-2px}
+.site-nav{display:flex;align-items:center;gap:6px 30px;font-weight:600;font-size:15px;letter-spacing:.04em}
+.site-nav a{color:inherit;text-decoration:none;padding:10px 0;border-bottom:1.5px solid transparent}
+.site-nav a:not(.btn):hover{border-bottom-color:currentColor}
+.site-nav .btn{min-height:46px;padding:0 20px;font-size:13px}
+.nav-toggle{display:none;width:48px;height:48px;border:1.5px solid currentColor;background:transparent;color:inherit;align-items:center;justify-content:center;padding:0}
+.nav-toggle .x{display:none}
+.nav-toggle[aria-expanded="true"] .bars{display:none}
+.nav-toggle[aria-expanded="true"] .x{display:inline}
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex}
+  header.top.menu-open{background:var(--bone);color:var(--ink)}
+  .site-nav{display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:0;padding:0 0 20px}
+  .site-nav.open{display:flex}
+  .site-nav a:not(.btn){padding:16px 2px;border-bottom:1px solid var(--line);font-size:18px}
+  .site-nav .btn{margin-top:16px;min-height:54px}
+}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:#fff;background:var(--forest)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,46,34,.45) 0%,rgba(28,46,34,.15) 35%,rgba(28,46,34,.82) 100%)}
+.hero-inner{position:relative;z-index:1;width:100%;padding-top:140px;padding-bottom:72px;display:grid;grid-template-columns:1.4fr .6fr;gap:40px;align-items:end}
+@media (max-width:900px){.hero-inner{grid-template-columns:1fr}}
+.hero .eyebrow{color:#E8E1D0}
+.hero h1{font-size:clamp(50px,8.4vw,124px);letter-spacing:-.02em;color:#fff}
+.hero h1 em{color:#F1D9A8}
+.hero-side{border-left:1px solid rgba(255,255,255,.4);padding-left:28px}
+@media (max-width:900px){.hero-side{border-left:0;padding-left:0;border-top:1px solid rgba(255,255,255,.4);padding-top:24px}}
+.hero-side p{margin:0 0 24px;font-size:18px;color:#F3EFE4}
+.hero-side .cta-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Intro */
+.intro{padding:130px 0 110px}
+.intro-grid{display:grid;grid-template-columns:.35fr 1fr;gap:48px}
+@media (max-width:900px){.intro-grid{grid-template-columns:1fr;gap:16px}}
+.intro p.statement{font-family:var(--serif);font-size:clamp(28px,3.4vw,44px);line-height:1.3;margin:0}
+.intro p.statement em{color:var(--moss)}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:0;margin:72px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.pillars li{padding:28px 28px 0 0}
+.pillars .n{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--amber-dark)}
+.pillars h3{font-size:26px;margin:6px 0 8px}
+.pillars p{margin:0;color:var(--muted)}
+
+/* Services: numbered list with image */
+.services{background:var(--forest);color:var(--bone);padding:120px 0}
+.services .eyebrow{color:var(--sage)}
+.services h2{font-size:clamp(40px,5.6vw,76px);color:var(--bone);margin-bottom:56px}
+.svc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+@media (max-width:900px){.svc-wrap{grid-template-columns:1fr}}
+.svc-list{margin:0;padding:0;list-style:none;border-top:1px solid rgba(243,239,228,.2)}
+.svc{border-bottom:1px solid rgba(243,239,228,.2)}
+.svc button{width:100%;display:grid;grid-template-columns:56px 1fr 28px;align-items:baseline;gap:12px;padding:26px 0;background:none;border:0;color:inherit;text-align:left}
+.svc .n{font-family:var(--serif);font-style:italic;color:var(--sage);font-size:20px}
+.svc .t{font-family:var(--serif);font-size:clamp(26px,2.8vw,36px);transition:color .2s ease}
+.svc .arrow{justify-self:end;transition:transform .25s ease}
+.svc button:hover .t,.svc.active .t{color:#F1D9A8}
+.svc.active .arrow{transform:rotate(90deg)}
+.svc .detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.svc.active .detail{grid-template-rows:1fr}
+.svc .detail>div{overflow:hidden}
+.svc .detail p{margin:0 0 26px 68px;color:#D7D2C3;max-width:520px}
+.svc .detail img{display:none}
+@media (max-width:900px){.svc .detail img{display:block;margin:0 0 26px 68px;width:calc(100% - 68px);aspect-ratio:4/3;object-fit:cover}}
+.svc-figure{position:sticky;top:120px;margin:0;aspect-ratio:4/5;overflow:hidden;background:var(--forest-2)}
+.svc-figure img{width:100%;height:100%;object-fit:cover;transition:opacity .35s ease}
+.svc-figure figcaption{position:absolute;left:0;bottom:0;padding:14px 18px;background:var(--forest);font-size:14px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+@media (max-width:900px){.svc-figure{display:none}}
+
+/* Projects: masonry */
+.projects{padding:120px 0}
+.head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:48px}
+.head-row h2{font-size:clamp(40px,5.6vw,76px)}
+.head-row p{margin:0;max-width:400px;color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:120px;gap:16px}
+.g{position:relative;margin:0;overflow:hidden;background:var(--bone-2)}
+.g img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.g:hover img{transform:scale(1.04)}
+.g figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;color:#fff;background:linear-gradient(180deg,transparent,rgba(28,46,34,.85));font-size:15px}
+.g figcaption b{display:block;font-family:var(--serif);font-weight:500;font-size:22px}
+.g1{grid-column:span 7;grid-row:span 4}.g2{grid-column:span 5;grid-row:span 2}.g3{grid-column:span 5;grid-row:span 2}
+.g4{grid-column:span 4;grid-row:span 3}.g5{grid-column:span 8;grid-row:span 3}
+@media (max-width:760px){.gallery{grid-template-columns:1fr;grid-auto-rows:auto}.g{grid-column:auto !important;grid-row:auto !important;aspect-ratio:4/3}}
+
+/* Estimator */
+.estimate{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:120px 0}
+.est-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+@media (max-width:960px){.est-grid{grid-template-columns:1fr}}
+.est-copy h2{font-size:clamp(40px,5.2vw,68px);margin-bottom:18px}
+.est-copy p{color:var(--muted);margin:0 0 14px}
+.est-tool{border:1px solid var(--line);background:var(--bone);display:grid;grid-template-columns:1.15fr .85fr}
+@media (max-width:700px){.est-tool{grid-template-columns:1fr}}
+.est-inputs{padding:34px;display:flex;flex-direction:column;gap:28px}
+.est-inputs fieldset{border:0;margin:0;padding:0;min-width:0}
+.est-inputs legend,.est-inputs .lbl{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;padding:0;display:block}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts input{position:absolute;opacity:0;width:1px;height:1px}
+.opts label{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid var(--line);background:var(--paper);font-weight:600;font-size:15px;transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+.opts input:checked+label{background:var(--forest);border-color:var(--forest);color:var(--bone)}
+.opts input:focus-visible+label{outline:3px solid var(--amber);outline-offset:3px}
+.range-row{display:flex;align-items:center;gap:16px}
+input[type=range]{flex:1;accent-color:var(--moss);height:44px}
+.size-out{min-width:92px;text-align:right;font-family:var(--serif);font-size:26px}
+.est-result{background:var(--forest);color:var(--bone);padding:34px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.est-result .lbl{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.est-price{font-family:var(--serif);font-size:clamp(36px,4vw,50px);line-height:1.1;margin:10px 0 6px;color:#F1D9A8}
+.est-result small{color:#C9C4B4;font-size:14px;line-height:1.55;display:block}
+
+/* Process */
+.process{padding:120px 0}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none;counter-reset:s}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+.steps li{border-top:2px solid var(--forest);padding:24px 28px 8px 0;position:relative}
+.steps li::before{counter-increment:s;content:"0" counter(s);font-family:var(--serif);font-style:italic;font-size:44px;color:var(--amber-dark);display:block;line-height:1;margin-bottom:16px}
+.steps h3{font-size:26px;margin-bottom:8px}
+.steps p{margin:0;color:var(--muted)}
+
+/* Quote */
+.quote{background:var(--forest-2);color:var(--bone);padding:120px 0}
+.quote .eyebrow{color:var(--sage)}
+.quote-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+@media (max-width:960px){.quote-grid{grid-template-columns:1fr}}
+.quote h2{font-size:clamp(40px,5.2vw,68px);color:var(--bone);margin-bottom:18px}
+.quote-copy p{color:#D7D2C3;margin:0 0 20px}
+.contact-list{margin:28px 0 0;padding:0;list-style:none;border-top:1px solid rgba(243,239,228,.2)}
+.contact-list li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(243,239,228,.2)}
+.contact-list span{color:var(--sage);font-size:14px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.contact-list a{color:var(--bone);text-decoration:none;font-weight:600}
+form.enquiry{background:var(--bone);color:var(--ink);padding:38px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:20px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--moss)}
+.field input,.field select,.field textarea{min-height:52px;padding:0 14px;border:0;border-bottom:2px solid var(--forest);background:var(--paper);color:var(--ink);border-radius:0}
+.field input[type=file]{padding:12px 14px;border:1.5px dashed var(--sage);background:var(--paper)}
+.field textarea{padding:12px 14px;resize:vertical}
+.field.full,form.enquiry button,.err-summary,.form-note{grid-column:1/-1}
+.form-note{margin:0;font-size:14px;color:var(--muted)}
+.field-err{margin:2px 0 0;font-size:14px;font-weight:700;color:#B42318;letter-spacing:0;text-transform:none}
+[aria-invalid="true"]{border-color:#B42318 !important;background:#FEF3F2 !important}
+.err-summary{border:2px solid #B42318;background:#FEF3F2;padding:14px 18px}
+.err-summary .err-title{margin:0 0 4px;font-weight:700}
+.err-summary ul{margin:0;padding-left:20px}
+.err-summary a{color:#B42318;font-weight:700}
+.form-ok{background:var(--bone);color:var(--ink);padding:48px 38px}
+.form-ok .ok-title{font-family:var(--serif);font-size:36px;margin:0 0 10px}
+.form-ok p{margin:0;color:var(--muted)}
+
+/* Footer */
+footer{background:var(--forest);color:#C9C4B4}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding:44px 0}
+.foot .logo{color:var(--bone)}
+.foot nav{display:flex;flex-wrap:wrap;gap:4px 24px}
+.foot a{color:#C9C4B4;padding:10px 0}
+.credit{border-top:1px solid rgba(243,239,228,.12);padding:16px 0 28px;font-size:14px}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none !important;animation:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap nav-bar">
+    <a class="logo" href="#top" aria-label="Greenline Landscapes, home">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V11"/><path d="M12 11C12 6 8 2.5 3.5 2.5c0 5 3.5 8.5 8.5 8.5z"/><path d="M12 15c0-4 3.5-7.5 8.5-7.5 0 4.5-3.5 7.5-8.5 7.5z"/></svg>
+      <span><b>Greenline</b><small>Landscapes</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="bars" d="M4 7h16M4 12h16M4 17h16"/><path class="x" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#estimate">Cost guide</a>
+      <a href="#process">Process</a>
+      <a class="btn btn-amber" href="#quote">Free quote</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <img src="https://images.unsplash.com/photo-1668120089662-42642838cfef?auto=format&fit=crop&w=2000&q=75" alt="" fetchpriority="high">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow">Garden design &amp; landscaping · [Your area]</span>
+      <h1>Gardens built<br>to be <em>lived in.</em></h1>
+    </div>
+    <div class="hero-side">
+      <p>Patios, planting, lawns and complete garden makeovers, designed around how you actually use your outdoor space.</p>
+      <div class="cta-row">
+        <a class="btn btn-amber" href="#quote">Get a free quote</a>
+        <a class="btn btn-line" href="#projects">Our work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro" aria-labelledby="intro-title">
+  <div class="wrap">
+    <div class="intro-grid">
+      <h2 id="intro-title" class="eyebrow">About us</h2>
+      <p class="statement">We're a small team of designers and builders who believe a good garden should feel <em>effortless</em>: somewhere to eat, play and unwind, that still looks good in February.</p>
+    </div>
+    <ul class="pillars">
+      <li><span class="n">i.</span><h3>One team, start to finish</h3><p>The people who design your garden are the people who build it. No hand-offs, no subcontractor surprises.</p></li>
+      <li><span class="n">ii.</span><h3>Fixed, written quotes</h3><p>One clear price covering materials, labour and waste removal, agreed before work begins.</p></li>
+      <li><span class="n">iii.</span><h3>Built for British weather</h3><p>Proper foundations, good drainage and plants chosen for your soil and light.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services" aria-labelledby="svc-title">
+  <div class="wrap">
+    <span class="eyebrow">What we do</span>
+    <h2 id="svc-title">Services</h2>
+    <div class="svc-wrap">
+      <ul class="svc-list">
+        <li class="svc active" data-img="https://images.unsplash.com/photo-1719324924230-63781a3f18b9?auto=format&fit=crop&w=900&q=70" data-cap="Patios &amp; paving">
+          <button type="button" aria-expanded="true" aria-controls="svc-1"><span class="n">01</span><span class="t">Patios &amp; paving</span><svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="detail" id="svc-1"><div><p>Natural stone, porcelain and block paving, laid on a properly compacted sub-base with drainage built in, so it stays level for decades.</p><img src="https://images.unsplash.com/photo-1719324924230-63781a3f18b9?auto=format&fit=crop&w=900&q=70" alt="A finished garden patio with table, chairs and parasol" loading="lazy"></div></div>
+        </li>
+        <li class="svc" data-img="https://images.unsplash.com/photo-1597201278257-3687be27d954?auto=format&fit=crop&w=900&q=70" data-cap="Planting design">
+          <button type="button" aria-expanded="false" aria-controls="svc-2"><span class="n">02</span><span class="t">Planting design</span><svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="detail" id="svc-2"><div><p>Borders planned for year-round interest and chosen for your soil, light and how much time you want to spend gardening.</p><img src="https://images.unsplash.com/photo-1597201278257-3687be27d954?auto=format&fit=crop&w=900&q=70" alt="Lush flower beds and clipped shrubs" loading="lazy"></div></div>
+        </li>
+        <li class="svc" data-img="https://images.unsplash.com/photo-1734079692079-aae7e24a7035?auto=format&fit=crop&w=900&q=70" data-cap="Lawns &amp; turf">
+          <button type="button" aria-expanded="false" aria-controls="svc-3"><span class="n">03</span><span class="t">Lawns &amp; turf</span><svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="detail" id="svc-3"><div><p>New turf on properly levelled, prepared ground, or renovation of a tired lawn with scarifying, aeration and overseeding.</p><img src="https://images.unsplash.com/photo-1734079692079-aae7e24a7035?auto=format&fit=crop&w=900&q=70" alt="Hands pressing fresh turf into the soil" loading="lazy"></div></div>
+        </li>
+        <li class="svc" data-img="https://images.unsplash.com/photo-1734079692160-fcbe4be6ab96?auto=format&fit=crop&w=900&q=70" data-cap="Full garden makeovers">
+          <button type="button" aria-expanded="false" aria-controls="svc-4"><span class="n">04</span><span class="t">Full garden makeovers</span><svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="detail" id="svc-4"><div><p>A complete design and build: layout drawings, materials, lighting and planting, managed by one team from first sketch to final plant.</p><img src="https://images.unsplash.com/photo-1734079692160-fcbe4be6ab96?auto=format&fit=crop&w=900&q=70" alt="A landscaper moving materials with a wheelbarrow" loading="lazy"></div></div>
+        </li>
+      </ul>
+      <figure class="svc-figure" aria-hidden="true">
+        <img id="svc-img" src="https://images.unsplash.com/photo-1719324924230-63781a3f18b9?auto=format&fit=crop&w=900&q=70" alt="">
+        <figcaption id="svc-cap">Patios &amp; paving</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects" aria-labelledby="proj-title">
+  <div class="wrap">
+    <div class="head-row">
+      <div><span class="eyebrow">Selected work</span><h2 id="proj-title">Recent projects</h2></div>
+      <p>A few gardens we've designed and built. Ask us for references from clients near you.</p>
+    </div>
+    <div class="gallery">
+      <figure class="g g1"><img src="https://images.unsplash.com/photo-1597201278257-3687be27d954?auto=format&fit=crop&w=1200&q=70" alt="Colourful flower borders around a lawn" loading="lazy"><figcaption><b>[Project name]</b>[Location] · Planting scheme</figcaption></figure>
+      <figure class="g g2"><img src="https://images.unsplash.com/photo-1705862851897-fa60b41617c2?auto=format&fit=crop&w=900&q=70" alt="Garden table and chairs surrounded by flowers" loading="lazy"><figcaption><b>[Project name]</b>[Location] · Courtyard</figcaption></figure>
+      <figure class="g g3"><img src="https://images.unsplash.com/photo-1719324924230-63781a3f18b9?auto=format&fit=crop&w=900&q=70" alt="Paved patio with dining set and parasol" loading="lazy"><figcaption><b>[Project name]</b>[Location] · Patio</figcaption></figure>
+      <figure class="g g4"><img src="https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?auto=format&fit=crop&w=900&q=70" alt="Landscaper digging with a spade" loading="lazy"><figcaption><b>[Project name]</b>[Location] · Groundworks</figcaption></figure>
+      <figure class="g g5"><img src="https://images.unsplash.com/photo-1668120089662-42642838cfef?auto=format&fit=crop&w=1400&q=70" alt="Wide lawn edged with shrubs and mature trees" loading="lazy"><figcaption><b>[Project name]</b>[Location] · Full makeover</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ESTIMATOR -->
+<section class="estimate" id="estimate" aria-labelledby="est-title">
+  <div class="wrap est-grid">
+    <div class="est-copy">
+      <span class="eyebrow">Cost guide</span>
+      <h2 id="est-title">What might it <em>cost?</em></h2>
+      <p>Get a rough idea in seconds. Every garden is different, so we'll always confirm a fixed price in writing after a free site visit.</p>
+      <p>Prices include materials, labour and waste removal.</p>
+    </div>
+    <div class="est-tool">
+      <div class="est-inputs">
+        <fieldset>
+          <legend>Type of work</legend>
+          <div class="opts">
+            <input type="radio" name="job" id="j-patio" value="patio" checked><label for="j-patio">Patio</label>
+            <input type="radio" name="job" id="j-lawn" value="lawn"><label for="j-lawn">New lawn</label>
+            <input type="radio" name="job" id="j-plant" value="planting"><label for="j-plant">Planting</label>
+            <input type="radio" name="job" id="j-fence" value="fence"><label for="j-fence">Fencing</label>
+          </div>
+        </fieldset>
+        <div>
+          <label class="lbl" for="size" id="size-lbl">Area (square metres)</label>
+          <div class="range-row"><input type="range" id="size" min="5" max="120" step="5" value="30" aria-describedby="size-out"><output class="size-out" id="size-out" for="size">30 m²</output></div>
+        </div>
+        <fieldset>
+          <legend>Finish</legend>
+          <div class="opts">
+            <input type="radio" name="finish" id="f-std" value="std" checked><label for="f-std">Standard</label>
+            <input type="radio" name="finish" id="f-prem" value="prem"><label for="f-prem">Premium</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="est-result">
+        <div>
+          <span class="lbl">Estimated cost</span>
+          <p class="est-price" id="est-price" aria-live="polite">£3,800 – £5,100</p>
+          <small id="est-note">Sandstone or porcelain, laid on a full sub-base.</small>
+        </div>
+        <div>
+          <small>Example rates for this sample site. Replace with your own pricing.</small>
+          <a class="btn btn-amber" href="#quote" style="margin-top:16px;width:100%">Get an exact quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process" aria-labelledby="pr-title">
+  <div class="wrap">
+    <div class="head-row"><div><span class="eyebrow">How it works</span><h2 id="pr-title">From first visit to finished garden</h2></div></div>
+    <ol class="steps">
+      <li><h3>Site visit</h3><p>We visit, measure up and talk through how you want to use the space. Free, with no obligation.</p></li>
+      <li><h3>Design &amp; quote</h3><p>A simple plan with materials and a fixed written price, usually within a week.</p></li>
+      <li><h3>The build</h3><p>A scheduled build with a tidy site and updates as each stage is finished.</p></li>
+      <li><h3>Handover</h3><p>A final walk-round together, plus care notes so your garden keeps looking its best.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote" id="quote" aria-labelledby="q-title">
+  <div class="wrap quote-grid">
+    <div class="quote-copy">
+      <span class="eyebrow">Free quote</span>
+      <h2 id="q-title">Let's talk about your garden</h2>
+      <p>Tell us a little about what you have in mind and we'll arrange a free site visit, usually within the week.</p>
+      <ul class="contact-list">
+        <li><span>Call</span><a href="tel:+440000000000">[Phone number]</a></li>
+        <li><span>Email</span><a href="mailto:hello@example.com">[Email address]</a></li>
+        <li><span>Area</span><b style="font-weight:600">[Towns you cover]</b></li>
+      </ul>
+    </div>
+    <form class="enquiry" novalidate>
+      <div class="field"><label for="q-name">Name</label><input id="q-name" name="name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" required></div>
+      <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="q-postcode">Postcode</label><input id="q-postcode" name="postcode" type="text" autocomplete="postal-code" required></div>
+      <div class="field full"><label for="q-service">Type of work</label>
+        <select id="q-service" name="service"><option>Patio or paving</option><option>Planting design</option><option>Lawn or turf</option><option>Fencing</option><option>Full garden makeover</option><option>Not sure yet</option></select></div>
+      <div class="field full"><label for="q-msg">About your garden <span style="text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)">(optional)</span></label><textarea id="q-msg" name="details" rows="3"></textarea></div>
+      <div class="field full"><label for="q-photos">Photos of your garden <span style="text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)">(optional)</span></label><input id="q-photos" name="photos" type="file" accept="image/*" multiple></div>
+      <button class="btn btn-forest" type="submit">Request my free quote</button>
+      <p class="form-note">We'll only use your details to arrange your quote. <a href="#top">Privacy notice</a></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#top">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V11"/><path d="M12 11C12 6 8 2.5 3.5 2.5c0 5 3.5 8.5 8.5 8.5z"/><path d="M12 15c0-4 3.5-7.5 8.5-7.5 0 4.5-3.5 7.5-8.5 7.5z"/></svg>
+      <span><b>Greenline</b><small>Landscapes</small></span>
+    </a>
+    <nav aria-label="Footer"><a href="#top">Instagram</a><a href="#top">Houzz</a><a href="#top">Privacy</a><a href="#top">Terms</a></nav>
+  </div>
+  <div class="wrap credit">Sample website for a fictional landscaping company. Photos from Unsplash. Prices are illustrative.</div>
+</footer>
+
+<script>
+(function(){
+  /* Header: solid after scrolling past the top of the hero */
+  var header=document.querySelector('header.top');
+  function onScroll(){header.classList.toggle('solid',window.scrollY>40);}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* Mobile menu */
+  var t=document.querySelector('.nav-toggle'),n=document.getElementById('site-nav');
+  function setNav(o){n.classList.toggle('open',o);header.classList.toggle('menu-open',o);t.setAttribute('aria-expanded',o?'true':'false');t.setAttribute('aria-label',o?'Close menu':'Open menu');}
+  t.addEventListener('click',function(){setNav(!n.classList.contains('open'));});
+  n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setNav(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){setNav(false);t.focus();}});
+
+  /* Services accordion with linked image */
+  var items=[].slice.call(document.querySelectorAll('.svc')),img=document.getElementById('svc-img'),cap=document.getElementById('svc-cap');
+  function activate(li){
+    items.forEach(function(x){var on=x===li;x.classList.toggle('active',on);x.querySelector('button').setAttribute('aria-expanded',on?'true':'false');});
+    if(img.getAttribute('src')!==li.dataset.img){img.style.opacity=0;setTimeout(function(){img.src=li.dataset.img;img.onload=function(){img.style.opacity=1;};},180);}
+    cap.innerHTML=li.dataset.cap;
+  }
+  items.forEach(function(li){
+    var b=li.querySelector('button');
+    b.addEventListener('click',function(){activate(li);});
+    li.addEventListener('mouseenter',function(){if(window.matchMedia('(hover:hover) and (min-width:901px)').matches)activate(li);});
+  });
+
+  /* Cost estimator (example rates per unit, plus a fixed setup cost) */
+  var rates={
+    patio:{std:110,prem:170,base:600,unit:'m²',label:'Area (square metres)',min:5,max:120,step:5,val:30,note:{std:'Sandstone or concrete paving on a full sub-base.',prem:'Porcelain or natural stone, with edging and drainage.'}},
+    lawn:{std:14,prem:24,base:250,unit:'m²',label:'Area (square metres)',min:10,max:300,step:10,val:80,note:{std:'Ground levelled and prepared, quality turf laid.',prem:'Imported topsoil, premium turf and steel edging.'}},
+    planting:{std:55,prem:90,base:200,unit:'m²',label:'Bed area (square metres)',min:2,max:60,step:2,val:12,note:{std:'Soil improvement, mixed shrubs and perennials.',prem:'Larger specimen plants, mulch and a planting plan.'}},
+    fence:{std:85,prem:140,base:150,unit:'m',label:'Length (metres)',min:4,max:60,step:2,val:20,note:{std:'Treated timber panels with concrete posts.',prem:'Slatted hardwood or composite screening.'}}
+  };
+  var size=document.getElementById('size'),out=document.getElementById('size-out'),lbl=document.getElementById('size-lbl'),price=document.getElementById('est-price'),note=document.getElementById('est-note');
+  function job(){return document.querySelector('input[name=job]:checked').value;}
+  function fin(){return document.querySelector('input[name=finish]:checked').value;}
+  function fmt(x){return '£'+(Math.round(x/50)*50).toLocaleString('en-GB');}
+  function calc(){
+    var r=rates[job()],f=fin(),q=Number(size.value),mid=r.base+r[f]*q;
+    out.textContent=q+' '+r.unit;
+    price.textContent=fmt(mid*0.88)+' – '+fmt(mid*1.18);
+    note.textContent=r.note[f];
+  }
+  document.querySelectorAll('input[name=job]').forEach(function(i){i.addEventListener('change',function(){var r=rates[job()];size.min=r.min;size.max=r.max;size.step=r.step;size.value=r.val;lbl.textContent=r.label;calc();});});
+  document.querySelectorAll('input[name=finish]').forEach(function(i){i.addEventListener('change',calc);});
+  size.addEventListener('input',calc);
+  calc();
+
+  /* Form validation */
+  document.querySelectorAll('form.enquiry').forEach(function(form){
+    var summary=document.createElement('div');summary.className='err-summary';summary.setAttribute('role','alert');summary.tabIndex=-1;summary.hidden=true;form.insertBefore(summary,form.firstChild);
+    var fields=form.querySelectorAll('[required]');
+    function labelFor(f){var l=form.querySelector('label[for="'+f.id+'"]');return l?l.childNodes[0].textContent.trim().toLowerCase():'this field';}
+    function check(f){
+      var err=document.getElementById(f.id+'-err');
+      if(!err){err=document.createElement('p');err.id=f.id+'-err';err.className='field-err';f.insertAdjacentElement('afterend',err);}
+      var v=f.validity,m='';
+      if(v.valueMissing)m='Enter your '+labelFor(f);else if(v.typeMismatch)m='Enter a valid '+labelFor(f);
+      err.textContent=m;err.hidden=!m;
+      if(m){f.setAttribute('aria-invalid','true');f.setAttribute('aria-describedby',err.id);}else{f.removeAttribute('aria-invalid');f.removeAttribute('aria-describedby');}
+      return m;
+    }
+    fields.forEach(function(f){f.addEventListener('blur',function(){if(f.value||f.getAttribute('aria-invalid'))check(f);});f.addEventListener('input',function(){if(f.getAttribute('aria-invalid'))check(f);});});
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var problems=[];fields.forEach(function(f){var m=check(f);if(m)problems.push([f,m]);});
+      if(problems.length){
+        summary.innerHTML='';var h=document.createElement('p');h.className='err-title';h.textContent='There is a problem';summary.appendChild(h);
+        var ul=document.createElement('ul');problems.forEach(function(p){var li=document.createElement('li');var a=document.createElement('a');a.href='#'+p[0].id;a.textContent=p[1];a.addEventListener('click',function(ev){ev.preventDefault();p[0].focus();});li.appendChild(a);ul.appendChild(li);});
+        summary.appendChild(ul);summary.hidden=false;summary.focus();return;
+      }
+      var ok=document.createElement('div');ok.className='form-ok';ok.setAttribute('role','status');ok.tabIndex=-1;
+      ok.innerHTML='<p class="ok-title">Thank you.</p><p>We’ll be in touch within two working days to arrange your free site visit. This is a sample site, so nothing was actually sent.</p>';
+      form.replaceWith(ok);ok.focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>
