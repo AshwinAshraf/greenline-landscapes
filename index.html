@@ -135,11 +135,11 @@ header.top.solid{background:var(--bone);color:var(--ink);box-shadow:0 1px 0 var(
 
 /* Estimator */
 .estimate{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:120px 0}
-.est-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+.est-grid{display:grid;grid-template-columns:minmax(0,.5fr) minmax(0,1.5fr);gap:56px;align-items:start}
 @media (max-width:960px){.est-grid{grid-template-columns:1fr}}
-.est-copy h2{font-size:clamp(40px,5.2vw,68px);margin-bottom:18px}
+.est-copy h2{font-size:clamp(38px,4.2vw,58px);margin-bottom:18px}
 .est-copy p{color:var(--muted);margin:0 0 14px}
-.est-tool{border:1px solid var(--line);background:var(--bone);display:grid;grid-template-columns:1.15fr .85fr}
+.est-tool{border:1px solid var(--line);background:var(--bone);display:grid;grid-template-columns:1.2fr .8fr}
 @media (max-width:700px){.est-tool{grid-template-columns:1fr}}
 .est-inputs{padding:34px;display:flex;flex-direction:column;gap:28px}
 .est-inputs fieldset{border:0;margin:0;padding:0;min-width:0}
